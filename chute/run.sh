@@ -5,10 +5,10 @@ mkdir -p /var/www/html/motionLog
 chmod a+rw /var/www/html/motionLog
 
 # Execute LED Bulb Control
-# python /usr/local/bin/LedControl.py > LedControl.log 2> LedControl.err &
+python /usr/local/bin/LedControl.py > LedControl.log 2> LedControl.err &
 
 # Execute the file, one pic every 2 seconds
-# python /usr/local/bin/smarthouse.py -m_sec 5.0 > smarthouse.log 2> smarthouse.err &
+python /usr/local/bin/smarthouse.py -m_sec 5.0 > smarthouse.log 2> smarthouse.err &
 
 # Add the symlink
 ln -s --relative /var/www/html/motionLog /var/www/html/app-dist/
