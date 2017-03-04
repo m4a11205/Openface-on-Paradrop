@@ -1,3 +1,12 @@
+docker pull bamos/openface
+docker run -p 9000:9000 -p 8000:8000 -t -i bamos/openface /bin/bash
+docker run -v /Users:/host/Users -p 9000:9000 -p 8000:8000 -t -i bamos/openface /bin/bash
+docker run -v /home/ubuntu/:/host/ubuntu -p 9000:9000 -p 8000:8000 -t -i bamos/openface /bin/bash
+cd /root/openface
+
+ls /host/Users/
+
+
 for N in {1..8}; do ./util/align-dlib.py ./training-images/ align outerEyesAndNose ./aligned-images/ --size 96 & done
 
 ./batch-represent/main.lua -outDir ./generated-embeddings/ -data ./aligned-images/
