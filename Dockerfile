@@ -36,7 +36,12 @@ ADD chute/web /var/www/html
 #
 # ADD chute/smarthouse.py /usr/local/bin/smarthouse.py
 # ADD chute/LedControl.py /usr/local/bin/LedControl.py
+
+ADD chute/abba.png /usr/local/bin/abba.png
+ADD chute/haarcascade_frontalface_default.xml /usr/local/bin/haarcascade_frontalface_default.xml
 ADD chute/test_cv.py /usr/local/bin/test_cv.py
+
+
 ADD chute/run.sh /usr/local/bin/run.sh
 
 # Set the work dir for nodejs photo server
