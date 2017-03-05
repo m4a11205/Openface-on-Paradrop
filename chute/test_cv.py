@@ -1,6 +1,13 @@
 import cv2
 import sys
 
+try:
+    import PIL
+    from PIL import Image, ImageChops
+except Exception as e:
+    print('No PIL, please install "python-imaging-library" if on OpenWrt')
+    sys.exit(1)
+
 if __name__ == "__main__":
     print("Loaded OpenCV version: {}".format(cv2.__version__))
 
@@ -29,3 +36,7 @@ if __name__ == "__main__":
     # Draw a rectangle around the faces
     for (x, y, w, h) in faces:
         cv2.rectangle(image, (x, y), (x+w, y+h), (0, 255, 0), 2)
+
+    fileName = "test.jpg"
+    print('jpg: %s' % str(fileName))
+    image = cv2.imwrite(fileName, image)
