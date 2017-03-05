@@ -21,9 +21,6 @@ RUN apt-get update && apt-get install -y \
 # Install Flask
 RUN pip install Flask
 
-# Install OpenCV
-# RUN pip install opencv-python
-
 # Apache site configuration
 ADD chute/000-default.conf /etc/apache2/sites-available/
 
@@ -34,15 +31,8 @@ ADD chute/web /var/www/html
 #
 # ADD <path_inside_repository> <path_inside_container>
 #
-
 ADD chute/smarthouse.py /usr/local/bin/smarthouse.py
 ADD chute/LedControl.py /usr/local/bin/LedControl.py
-
-ADD chute/abba.png /usr/local/bin/abba.png
-ADD chute/haarcascade_frontalface_default.xml /usr/local/bin/haarcascade_frontalface_default.xml
-ADD chute/test_cv.py /usr/local/bin/test_cv.py
-
-
 ADD chute/run.sh /usr/local/bin/run.sh
 
 # Set the work dir for nodejs photo server
