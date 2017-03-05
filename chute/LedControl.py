@@ -32,7 +32,6 @@ def create_LED_App(bulb):
     def parseJSON():
         if request.method == 'POST':
             feature = request.form['feature']
-
             if(feature == "power"):
                 val = request.form['value']
                 if(val == "0"):
