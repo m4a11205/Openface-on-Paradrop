@@ -21,6 +21,15 @@ RUN apt-get update && apt-get install -y \
 # Install Flask
 RUN pip install Flask
 
+# Install sklearn
+RUN sudo pip install --upgrade pip
+RUN sudo pip install numpy
+RUN sudo pip install scipy
+RUN sudo pip install -U scikit-learn
+
+# Install OpenCV
+RUN sudo pip install opencv-python
+
 # Apache site configuration
 ADD chute/000-default.conf /etc/apache2/sites-available/
 
@@ -33,6 +42,9 @@ ADD chute/web /var/www/html
 #
 ADD chute/smarthouse.py /usr/local/bin/smarthouse.py
 ADD chute/LedControl.py /usr/local/bin/LedControl.py
+ADD chute/test_cv.py /usr/local/bin/test_cv.py
+ADD chute/haarcascade_frontalface_default.xml /usr/local/bin/haarcascade_frontalface_default.xml
+ADD chute/yalefaces /usr/local/bin/yalefaces
 ADD chute/run.sh /usr/local/bin/run.sh
 
 # Set the work dir for nodejs photo server
