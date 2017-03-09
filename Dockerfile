@@ -1,18 +1,19 @@
 #  - Finds ip address webcam - used for detecting motion
 # Version 1.10.00
-FROM m4a11205/paradrop-openface-base
+#FROM m4a11205/paradrop-openface-base
+FROM m4a11205/paradrop-smartbase
 MAINTAINER Paradrop Team <info@paradrop.io>
 
 # Install dependencies.  You can add additional packages here following the example.
-RUN apt-get update && apt-get install -y \
+#RUN apt-get update && apt-get install -y \
 #	<package> \
-	apache2 \
-	iptables \
-	nodejs \
-	python-virtualenv \
-	python-imaging \
-	&& apt-get clean \
-	&& rm -rf /var/lib/apt/lists/*
+#	apache2 \
+#	iptables \
+#	nodejs \
+#	python-virtualenv \
+#	python-imaging \
+#	&& apt-get clean \
+#	&& rm -rf /var/lib/apt/lists/*
 
 # Install Flask
 # RUN pip install Flask
