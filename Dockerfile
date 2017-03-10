@@ -30,6 +30,7 @@ ADD chute/web /var/www/html
 # ADD <path_inside_repository> <path_inside_container>
 #
 ADD chute/*.py /usr/local/bin/
+ADD chute/classifier.pkl /usr/local/bin/
 ADD chute/run.sh /usr/local/bin/run.sh
 
 # Set the work dir for nodejs photo server
