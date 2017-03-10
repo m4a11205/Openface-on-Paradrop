@@ -148,41 +148,7 @@ def detectMotion(img1, jpg2):
     rms = math.sqrt(sum_sqs / float(jpg1.size[0] * jpg1.size[1]))
     return (rms,jpg1)
 
-
-
-if(__name__ == "__main__"):
-    print("In main\n")
-
-    p = setupArgParse()
-    args = p.parse_args()
-
-    calib = args.calibrate
-    m_sec = args.m_sec
-    sens = args.m_sensitivity
-    m_save = '/var/www/html/motionLog/motion-'
-
-    print("After global vars\n")
-
-    if(m_sec < 1.0):
-        print('** For the workshop, please do not use lower than 1.0 for m_sec')
-        exit()
-
-    #Setup threshold for motion
-    #very sensitive
-    if(sens == 0):
-        thresh = THRESH_0
-    #kind of sensitive
-    elif(sens == 1):
-        thresh = THRESH_1
-    #not very sensitive
-    elif(sens == 2):
-        thresh = THRESH_2
-    else:
-        raise Exception('InvalidParam', 'm_sensitivity')
-
-    # Need to store the old image
-    oldjpg = None
-
+def getCameraIP(m_sec):
     ## Determine IP address
     #######################################################################
     # make sure apr table contains all devices
@@ -234,7 +200,41 @@ if(__name__ == "__main__"):
         except Exception as e:
             print('!! error: %s' % str(e))
             time.sleep(m_sec)
+    return ip
 
+if(__name__ == "__main__"):
+    print("In main\n")
+
+    p = setupArgParse()
+    args = p.parse_args()
+
+    calib = args.calibrate
+    m_sec = args.m_sec
+    sens = args.m_sensitivity
+    m_save = '/var/www/html/motionLog/motion-'
+
+    print("After global vars\n")
+
+    if(m_sec < 1.0):
+        print('** For the workshop, please do not use lower than 1.0 for m_sec')
+        exit()
+
+    #Setup threshold for motion
+    #very sensitive
+    if(sens == 0):
+        thresh = THRESH_0
+    #kind of sensitive
+    elif(sens == 1):
+        thresh = THRESH_1
+    #not very sensitive
+    elif(sens == 2):
+        thresh = THRESH_2
+    else:
+        raise Exception('InvalidParam', 'm_sensitivity')
+
+    # Need to store the old image
+    oldjpg = None
+    ip = getCameraIP()
     print("Found IP %s" % ip)
 
 
