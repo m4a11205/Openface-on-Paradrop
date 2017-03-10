@@ -234,7 +234,7 @@ if(__name__ == "__main__"):
 
     # Need to store the old image
     oldjpg = None
-    ip = getCameraIP()
+    ip = getCameraIP(m_sec)
     print("Found IP %s" % ip)
 
 
