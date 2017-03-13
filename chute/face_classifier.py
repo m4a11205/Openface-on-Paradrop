@@ -45,7 +45,7 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.naive_bayes import GaussianNB
 
 
-def getRep(imgPath, align, net, multiple):
+def getRep(imgPath, args, align, net, multiple):
     start = time.time()
     bgrImg = cv2.imread(imgPath)
     if bgrImg is None:
@@ -91,7 +91,7 @@ def infer(args, multiple=False):
 
     for img in args.imgs:
         print("\n=== {} ===".format(img))
-        reps = getRep(img, align, net, multiple)
+        reps = getRep(img, args, align, net, multiple)
         if len(reps) > 1:
             print("List of faces in image from left to right")
         for r in reps:
