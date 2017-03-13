@@ -89,24 +89,32 @@ def infer(args, align, net, multiple=False):
     for img in args.imgs:
         print("\n=== {} ===".format(img))
         scores = []
-        reps = getRep(img, args, align, net, multiple)
-        if len(reps) > 1:
-            print("List of faces in image from left to right")
-        for r in reps:
-            rep = r[1].reshape(1, -1)
-            bbx = r[0]
-            start = time.time()
-            predictions = clf.predict_proba(rep).ravel()
-            maxI = np.argmax(predictions)
-            person = le.inverse_transform(maxI)
-            confidence = predictions[maxI]
 
-            if multiple:
-                print("Predict {} @ x={} with {:.2f} confidence.".format(person, bbx, confidence))
-            else:
-                scores.append(confidence)
-                print("Predict {} with {:.2f} confidence.".format(person, confidence))
+        try:
+            reps = getRep(img, args, align, net, multiple)
 
-            if isinstance(clf, GMM):
-                dist = np.linalg.norm(rep - clf.means_[maxI])
-                print("  + Distance from the mean: {}".format(dist))
+            if len(reps) > 1:
+                print("List of faces in image from left to right")
+
+            for r in reps:
+                rep = r[1].reshape(1, -1)
+                bbx = r[0]
+                start = time.time()
+                predictions = clf.predict_proba(rep).ravel()
+                maxI = np.argmax(predictions)
+                person = le.inverse_transform(maxI)
+                confidence = predictions[maxI]
+
+                if multiple:
+                    print("Predict {} @ x={} with {:.2f} confidence.".format(person, bbx, confidence))
+                else:
+                    scores.append(confidence)
+                    print("Predict {} with {:.2f} confidence.".format(person, confidence))
+
+                if isinstance(clf, GMM):
+                    dist = np.linalg.norm(rep - clf.means_[maxI])
+                    print("  + Distance from the mean: {}".format(dist))
+                    
+        except Exception as e:
+            print('!! Warning: %s' % str(e))
+            return scores
