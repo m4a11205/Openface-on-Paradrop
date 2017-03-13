@@ -50,7 +50,7 @@ dlibModelDir = os.path.join(modelDir, 'dlib')
 openfaceModelDir = os.path.join(modelDir, 'openface')
 
 
-def getRep(imgPath, multiple=False, align):
+def getRep(imgPath, align, multiple=False):
     start = time.time()
     bgrImg = cv2.imread(imgPath)
     if bgrImg is None:
@@ -94,13 +94,13 @@ def getRep(imgPath, multiple=False, align):
     return sreps
 
 
-def infer(args, multiple=False, align):
+def infer(args, align, multiple=False):
     with open(args.classifierModel, 'r') as f:
         (le, clf) = pickle.load(f)
 
     for img in args.imgs:
         print("\n=== {} ===".format(img))
-        reps = getRep(img, multiple, align)
+        reps = getRep(img, align, multiple)
         if len(reps) > 1:
             print("List of faces in image from left to right")
         for r in reps:
