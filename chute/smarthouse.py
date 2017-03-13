@@ -295,7 +295,7 @@ if(__name__ == "__main__"):
 
     align = openface.AlignDlib(args.dlibFacePredictor)
     net = openface.TorchNeuralNet(args.networkModel, imgDim=args.imgDim, cuda=args.cuda)
-    face_classifier.infer(args, args.multi)
+    face_classifier.infer(args, args.multi, align)
 
     # Need to store the old image
     oldjpg = None
