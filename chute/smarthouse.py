@@ -293,9 +293,7 @@ if(__name__ == "__main__"):
     else:
         raise Exception('InvalidParam', 'm_sensitivity')
 
-    align = openface.AlignDlib(args.dlibFacePredictor)
-    net = openface.TorchNeuralNet(args.networkModel, imgDim=args.imgDim, cuda=args.cuda)
-    face_classifier.infer(args, align, args.multi)
+    face_classifier.infer(args, args.multi)
 
     # Need to store the old image
     oldjpg = None

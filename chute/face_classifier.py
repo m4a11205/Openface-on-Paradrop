@@ -44,13 +44,8 @@ from sklearn.mixture import GMM
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.naive_bayes import GaussianNB
 
-fileDir = os.path.dirname(os.path.realpath(__file__))
-modelDir = '/root/openface/models'
-dlibModelDir = os.path.join(modelDir, 'dlib')
-openfaceModelDir = os.path.join(modelDir, 'openface')
 
-
-def getRep(imgPath, align, multiple=False):
+def getRep(imgPath, align, net, multiple):
     start = time.time()
     bgrImg = cv2.imread(imgPath)
     if bgrImg is None:
@@ -67,8 +62,6 @@ def getRep(imgPath, align, multiple=False):
         bbs = [bb1]
     if len(bbs) == 0 or (not multiple and bb1 is None):
         raise Exception("Unable to find a face: {}".format(imgPath))
-    if args.verbose:
-        print("Face detection took {} seconds.".format(time.time() - start))
 
     reps = []
     for bb in bbs:
@@ -80,27 +73,25 @@ def getRep(imgPath, align, multiple=False):
             landmarkIndices=openface.AlignDlib.OUTER_EYES_AND_NOSE)
         if alignedFace is None:
             raise Exception("Unable to align image: {}".format(imgPath))
-        if args.verbose:
-            print("Alignment took {} seconds.".format(time.time() - start))
-            print("This bbox is centered at {}, {}".format(bb.center().x, bb.center().y))
 
         start = time.time()
         rep = net.forward(alignedFace)
-        if args.verbose:
-            print("Neural network forward pass took {} seconds.".format(
-                time.time() - start))
         reps.append((bb.center().x, rep))
+
     sreps = sorted(reps, key=lambda x: x[0])
     return sreps
 
 
-def infer(args, align, multiple=False):
+def infer(args, multiple=False):
     with open(args.classifierModel, 'r') as f:
         (le, clf) = pickle.load(f)
 
+    align = openface.AlignDlib(args.dlibFacePredictor)
+    net = openface.TorchNeuralNet(args.networkModel, imgDim=args.imgDim, cuda=args.cuda)
+
     for img in args.imgs:
         print("\n=== {} ===".format(img))
-        reps = getRep(img, align, multiple)
+        reps = getRep(img, align, net, multiple)
         if len(reps) > 1:
             print("List of faces in image from left to right")
         for r in reps:
@@ -121,68 +112,3 @@ def infer(args, align, multiple=False):
             if isinstance(clf, GMM):
                 dist = np.linalg.norm(rep - clf.means_[maxI])
                 print("  + Distance from the mean: {}".format(dist))
-
-'''
-if __name__ == '__main__':
-
-    parser = argparse.ArgumentParser()
-
-    parser.add_argument(
-        '--dlibFacePredictor',
-        type=str,
-        help="Path to dlib's face predictor.",
-        default=os.path.join(
-            dlibModelDir,
-            "shape_predictor_68_face_landmarks.dat"))
-    parser.add_argument(
-        '--networkModel',
-        type=str,
-        help="Path to Torch network model.",
-        default=os.path.join(
-            openfaceModelDir,
-            'nn4.small2.v1.t7'))
-    parser.add_argument('--imgDim', type=int,
-                        help="Default image dimension.", default=96)
-    parser.add_argument('--cuda', action='store_true')
-    parser.add_argument('--verbose', action='store_true')
-
-    subparsers = parser.add_subparsers(dest='mode', help="Mode")
-    trainParser = subparsers.add_parser('train',
-                                        help="Train a new classifier.")
-    trainParser.add_argument('--ldaDim', type=int, default=-1)
-    trainParser.add_argument(
-        '--classifier',
-        type=str,
-        choices=[
-            'LinearSvm',
-            'GridSearchSvm',
-            'GMM',
-            'RadialSvm',
-            'DecisionTree',
-            'GaussianNB',
-            'DBN'],
-        help='The type of classifier to use.',
-        default='LinearSvm')
-    trainParser.add_argument(
-        'workDir',
-        type=str,
-        help="The input work directory containing 'reps.csv' and 'labels.csv'. Obtained from aligning a directory with 'align-dlib' and getting the representations with 'batch-represent'.")
-
-    inferParser = subparsers.add_parser(
-        'infer', help='Predict who an image contains from a trained classifier.')
-    inferParser.add_argument(
-        'classifierModel',
-        type=str,
-        help='The Python pickle representing the classifier. This is NOT the Torch network model, which can be set with --networkModel.')
-    inferParser.add_argument('imgs', type=str, nargs='+',
-                             help="Input image.")
-    inferParser.add_argument('--multi', help="Infer multiple faces in image",
-                             action="store_true")
-
-    args = parser.parse_args()
-
-    align = openface.AlignDlib(args.dlibFacePredictor)
-    net = openface.TorchNeuralNet(args.networkModel, imgDim=args.imgDim, cuda=args.cuda)
-
-    infer(args, args.multi)
-'''
