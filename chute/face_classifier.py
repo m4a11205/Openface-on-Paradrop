@@ -58,11 +58,6 @@ def getRep(imgPath, multiple=False):
 
     rgbImg = cv2.cvtColor(bgrImg, cv2.COLOR_BGR2RGB)
 
-    if args.verbose:
-        print("  + Original size: {}".format(rgbImg.shape))
-    if args.verbose:
-        print("Loading the image took {} seconds.".format(time.time() - start))
-
     start = time.time()
 
     if multiple:
@@ -127,7 +122,7 @@ def infer(args, multiple=False):
                 dist = np.linalg.norm(rep - clf.means_[maxI])
                 print("  + Distance from the mean: {}".format(dist))
 
-
+'''
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
@@ -185,31 +180,9 @@ if __name__ == '__main__':
                              action="store_true")
 
     args = parser.parse_args()
-    if args.verbose:
-        print("Argument parsing and import libraries took {} seconds.".format(
-            time.time() - start))
-
-    if args.mode == 'infer' and args.classifierModel.endswith(".t7"):
-        raise Exception("""
-Torch network model passed as the classification model,
-which should be a Python pickle (.pkl)
-
-See the documentation for the distinction between the Torch
-network and classification models:
-
-        http://cmusatyalab.github.io/openface/demo-3-classifier/
-        http://cmusatyalab.github.io/openface/training-new-models/
-
-Use `--networkModel` to set a non-standard Torch network model.""")
-    start = time.time()
 
     align = openface.AlignDlib(args.dlibFacePredictor)
-    net = openface.TorchNeuralNet(args.networkModel, imgDim=args.imgDim,
-                                  cuda=args.cuda)
-
-    if args.verbose:
-        print("Loading the dlib and OpenFace models took {} seconds.".format(
-            time.time() - start))
-        start = time.time()
+    net = openface.TorchNeuralNet(args.networkModel, imgDim=args.imgDim, cuda=args.cuda)
 
     infer(args, args.multi)
+'''
