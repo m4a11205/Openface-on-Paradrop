@@ -261,8 +261,6 @@ def getCameraIP(m_sec):
                 p5 = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
                 output5, errors5 = p5.communicate()
 
-            time.sleep(m_sec)
-
         except KeyboardInterrupt:
             break
         except Exception as e:
