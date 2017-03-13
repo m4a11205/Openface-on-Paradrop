@@ -88,6 +88,7 @@ def run_app(ip, m_save):
 
 def setupArgParse():
     parser = argparse.ArgumentParser(description='smarthouse security suite')
+    parser.add_argument('-calibrate', help='Temporary mode to help calibrate the thresholds', action='store_true')
     parser.add_argument('-m_sec', help='How much time to wait between motion images', type=float, default=2.0)
     parser.add_argument('-m_sensitivity', help='How sensitive the motion capture should be, 0=very, 1=somewhat, 2=not very', type=int, default=0)
 

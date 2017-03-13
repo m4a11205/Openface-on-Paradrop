@@ -9,6 +9,7 @@ chmod a+rw /var/www/html/motionLog
 
 # Execute the file, one pic every 2 seconds
 #python /usr/local/bin/smarthouse.py -m_sec 5.0 > smarthouse.log 2> smarthouse.err &
+#python smarthouse.py -m_sec 5.0 infer classifier.pkl /root/openface/test-images/curry/*.jpg
 
 #python face_classifier.py infer classifier.pkl /root/openface/test-images/curry/
 
