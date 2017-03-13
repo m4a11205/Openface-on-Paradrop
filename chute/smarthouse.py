@@ -30,7 +30,7 @@ THRESH_2 = 60.0
 
 #'''
 
-def create_app(ip, m_save):
+def create_app(ip, m_save, args):
     app = Flask(__name__)
 
     @app.route('/login', methods=['GET', 'POST'])
@@ -74,6 +74,9 @@ def create_app(ip, m_save):
                 print('!! error: %s' % str(e))
                 jpg = None
                 time.sleep(2.0)
+                
+        ## face recognition
+        face_classifier.infer(args, args.multi)
         return fileName
 
     return app
@@ -293,7 +296,7 @@ if(__name__ == "__main__"):
     else:
         raise Exception('InvalidParam', 'm_sensitivity')
 
-    face_classifier.infer(args, args.multi)
+    #face_classifier.infer(args, args.multi)
 
     # Need to store the old image
     oldjpg = None
@@ -302,7 +305,7 @@ if(__name__ == "__main__"):
 
 
     try:
-       thread.start_new_thread( run_app, (ip, m_save,) )
+       thread.start_new_thread( run_app, (ip, m_save, args) )
     except:
        print "Error: unable to start thread"
 
