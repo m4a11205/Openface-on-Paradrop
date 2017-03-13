@@ -299,6 +299,8 @@ if(__name__ == "__main__"):
         raise Exception('InvalidParam', 'm_sensitivity')
 
     #face_classifier.infer(args, args.multi)
+    args.imgs = []
+    args.imgs.append('/root/openface/test-images/curry/c1.jpg')
     print(args.imgs)
 
     # Need to store the old image
