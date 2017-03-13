@@ -30,7 +30,7 @@ THRESH_2 = 60.0
 
 #'''
 
-def create_app(ip, m_save, args):
+def create_app(ip, m_save, args, align, net):
     app = Flask(__name__)
 
     @app.route('/login', methods=['GET', 'POST'])
@@ -76,13 +76,15 @@ def create_app(ip, m_save, args):
                 time.sleep(2.0)
 
         ## face recognition
-        face_classifier.infer(args, args.multi)
+        args.imgs = []
+        args.imgs.append(fileName)
+        scores = face_classifier.infer(args, align, net, args.multi)
         return fileName
 
     return app
 
 #'''
-def run_app(ip, m_save, args):
+def run_app(ip, m_save, args, align, net):
     print("\nListen!!!\n")
     app = create_app(ip, m_save, args)
     app.run(host = '0.0.0.0', port = 8011)
@@ -298,10 +300,9 @@ if(__name__ == "__main__"):
     else:
         raise Exception('InvalidParam', 'm_sensitivity')
 
-    #face_classifier.infer(args, args.multi)
-    args.imgs = []
-    args.imgs.append('/root/openface/test-images/curry/c1.jpg')
-    print(args.imgs)
+    #Face recognition setup
+    align = openface.AlignDlib(args.dlibFacePredictor)
+    net = openface.TorchNeuralNet(args.networkModel, imgDim=args.imgDim, cuda=args.cuda)
 
     # Need to store the old image
     oldjpg = None
@@ -310,7 +311,7 @@ if(__name__ == "__main__"):
 
 
     try:
-       thread.start_new_thread( run_app, (ip, m_save, args) )
+       thread.start_new_thread( run_app, (ip, m_save, args, align, net) )
     except:
        print "Error: unable to start thread"
 

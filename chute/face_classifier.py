@@ -82,15 +82,13 @@ def getRep(imgPath, args, align, net, multiple):
     return sreps
 
 
-def infer(args, multiple=False):
+def infer(args, align, net, multiple=False):
     with open(args.classifierModel, 'r') as f:
         (le, clf) = pickle.load(f)
 
-    align = openface.AlignDlib(args.dlibFacePredictor)
-    net = openface.TorchNeuralNet(args.networkModel, imgDim=args.imgDim, cuda=args.cuda)
-
     for img in args.imgs:
         print("\n=== {} ===".format(img))
+        scores = []
         reps = getRep(img, args, align, net, multiple)
         if len(reps) > 1:
             print("List of faces in image from left to right")
@@ -102,13 +100,13 @@ def infer(args, multiple=False):
             maxI = np.argmax(predictions)
             person = le.inverse_transform(maxI)
             confidence = predictions[maxI]
-            if args.verbose:
-                print("Prediction took {} seconds.".format(time.time() - start))
+
             if multiple:
-                print("Predict {} @ x={} with {:.2f} confidence.".format(person, bbx,
-                                                                         confidence))
+                print("Predict {} @ x={} with {:.2f} confidence.".format(person, bbx, confidence))
             else:
+                scores.append(confidence)
                 print("Predict {} with {:.2f} confidence.".format(person, confidence))
+
             if isinstance(clf, GMM):
                 dist = np.linalg.norm(rep - clf.means_[maxI])
                 print("  + Distance from the mean: {}".format(dist))
