@@ -82,9 +82,9 @@ def create_app(ip, m_save, args):
     return app
 
 #'''
-def run_app(ip, m_save):
+def run_app(ip, m_save, args):
     print("\nListen!!!\n")
-    app = create_app(ip, m_save)
+    app = create_app(ip, m_save, args)
     app.run(host = '0.0.0.0', port = 8011)
 #'''
 
