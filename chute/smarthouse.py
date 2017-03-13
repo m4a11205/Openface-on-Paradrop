@@ -74,7 +74,7 @@ def create_app(ip, m_save, args):
                 print('!! error: %s' % str(e))
                 jpg = None
                 time.sleep(2.0)
-                
+
         ## face recognition
         face_classifier.infer(args, args.multi)
         return fileName
@@ -219,8 +219,10 @@ def getCameraIP(m_sec):
     # Get the subnet of paradrop
     subnet = ""
     ip = ""
+    loop = 0
     while(ip == ""):
-        print("Try to connect from router to WebCam")
+        loop = loop + 1
+        print(loop, "Try to connect from router to WebCam")
         try:
 
             # Get the subnet if haven't yet
@@ -258,6 +260,8 @@ def getCameraIP(m_sec):
                 print "cmd: " + cmd
                 p5 = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
                 output5, errors5 = p5.communicate()
+
+            time.sleep(m_sec)
 
         except KeyboardInterrupt:
             break
