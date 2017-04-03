@@ -28,6 +28,24 @@ def create_LED_App(bulb):
         bulb.turnOff()
         return "LED Off"
 
+    @app.route('/faceMatch')
+    def ledFlashGreen():
+	for flashCnt in range(5):
+	    bulb.setWarmWhite(1)
+	    time.sleep(1)
+	    bulb.setRgb(0,255,0)
+	    time.sleep(1)
+	return "face match"
+
+    @app.route('/faceDismatch')
+    def ledFlashRed():
+	for flashCnt in range(5):
+	    bulb.setWarmWhite(1)
+	    time.sleep(1)
+	    bulb.setRgb(255,0,0)
+	    time.sleep(1)
+	return "face dismatch"
+
     @app.route('/json', methods=['GET', 'POST'])
     def parseJSON():
         if request.method == 'POST':
