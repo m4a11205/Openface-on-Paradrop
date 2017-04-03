@@ -28,23 +28,23 @@ def create_LED_App(bulb):
         bulb.turnOff()
         return "LED Off"
 
-    @app.route('/faceMatch')
+    @app.route('/flash/green')
     def ledFlashGreen():
-	for flashCnt in range(5):
-	    bulb.setWarmWhite(1)
-	    time.sleep(1)
-	    bulb.setRgb(0,255,0)
-	    time.sleep(1)
-	return "face match"
+        for flashCnt in range(5):
+            bulb.setWarmWhite(1)
+            time.sleep(1.0)
+            bulb.setRgb(0,255,0)
+            time.sleep(1.0)
+        return "flash green"
 
-    @app.route('/faceDismatch')
+    @app.route('/flash/red')
     def ledFlashRed():
-	for flashCnt in range(5):
-	    bulb.setWarmWhite(1)
-	    time.sleep(1)
-	    bulb.setRgb(255,0,0)
-	    time.sleep(1)
-	return "face dismatch"
+        for flashCnt in range(5):
+            bulb.setWarmWhite(1)
+            time.sleep(1.0)
+            bulb.setRgb(255,0,0)
+            time.sleep(1.0)
+        return "flash red"
 
     @app.route('/json', methods=['GET', 'POST'])
     def parseJSON():
@@ -273,17 +273,35 @@ def parseArgs():
     return (options, args)
 
 
+def connectBulb():
+    bulb_ip = "192.168.128.187"
+    bulb = WifiLedBulb(bulb_ip)
+    bulb.setRgb(100, 0, 100)
+
+    ## start multi-thread to listening the flask packet
+    try:
+       thread.start_new_thread( run_LED_App, (bulb,) )
+    except:
+       print "Error: unable to start thread in LED control"
+
 '''
 Main
 '''
 
 if __name__ == "__main__":
     (options, args) = parseArgs()
+
+    print("In LED Control Main")
+    connectBulb()
+
+    while(True):
+        continue
+
+    '''
     addrs = []
     bulb_ip = ""
     bulb    = None
-
-    print("In LED Control Main")
+    '''
 
     '''
     ## connect the LED bulb
@@ -303,6 +321,7 @@ if __name__ == "__main__":
         bulb.setRgb(100, 0, 100)
     '''
 
+    '''
     bulb_ip = "192.168.128.187"
     bulb = WifiLedBulb(bulb_ip)
     bulb.setRgb(100, 0, 100)
@@ -315,18 +334,4 @@ if __name__ == "__main__":
 
     while(True):
         continue
-
-'''
-    if options.scan:
-        scan()
-    else:
-        addrs = args
-        for addr in args:
-            bulb = WifiLedBulb(addr)
-    if options.on:
-        bulb.turnOn()
-    elif options.off:
-        bulb.turnOff()
-    if options.color is not None:
-        bulb.setRgb(options.color[0], options.color[1], options.color[2])
-'''
+    '''
