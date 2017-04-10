@@ -16,11 +16,11 @@ except Exception as e:
     print('No PIL, please install "python-imaging-library" if on OpenWrt')
     sys.exit(1)
 
-#############################
+##########################################################
 import face_classifier
 import seccam
 import LedControl
-#############################
+##########################################################
 
 
 fileDir = os.path.dirname(os.path.realpath(__file__))
@@ -116,10 +116,11 @@ if(__name__ == "__main__"):
     align = openface.AlignDlib(args.dlibFacePredictor)
     net = openface.TorchNeuralNet(args.networkModel, imgDim=args.imgDim, cuda=args.cuda)
 
+    ######################### LED ############################
     # Run LED Controller App
     LedControl.connectBulb()
 
-    '''
+    ###################### WebCam ############################
     # Get camera IP
     camIP = seccam.getCameraIP(m_sec)
     print("Found camIP %s" % camIP)
@@ -135,7 +136,9 @@ if(__name__ == "__main__"):
        thread.start_new_thread( seccam.surveillance, (camIP, args, m_save) )
     except:
        print "Error: unable to start seccam.surveillance"
-    '''
 
+
+    ###################### Main Loop #########################
     while(True):
        pass
+    ##########################################################
