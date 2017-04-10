@@ -211,7 +211,7 @@ def getCameraIP(m_sec):
     return ip
 
 
-def surveillance(camIP, args):
+def surveillance(camIP, args, m_save):
     calib = args.calibrate
     m_sec = args.m_sec
     sens = args.m_sensitivity

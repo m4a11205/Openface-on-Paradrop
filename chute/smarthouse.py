@@ -124,4 +124,4 @@ if(__name__ == "__main__"):
 
     #while(True):
     #   pass
-    seccam.surveillance(camIP, args)
+    seccam.surveillance(camIP, args, m_save)
