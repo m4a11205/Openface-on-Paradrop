@@ -129,4 +129,13 @@ if(__name__ == "__main__"):
        thread.start_new_thread( seccam.run_app, (camIP, m_save, args, align, net) )
     except:
        print "Error: unable to start seccam.run_app thread"
+
+    # Run Camera Surveillance
+    try:
+       thread.start_new_thread( seccam.surveillance, (camIP, args, m_save) )
+    except:
+       print "Error: unable to start seccam.surveillance"
     '''
+
+    while(True):
+       pass

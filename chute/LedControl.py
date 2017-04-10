@@ -83,6 +83,7 @@ def create_LED_App(bulb):
 
 
 def run_LED_App(bulb):
+    print "LED Control is Ready!"
     app = create_LED_App(bulb)
     app.run(host = '0.0.0.0', port = 8012)
 
