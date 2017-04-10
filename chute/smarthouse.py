@@ -101,7 +101,7 @@ if(__name__ == "__main__"):
     m_sec = args.m_sec
     m_save = '/var/www/html/motionLog/motion-'
 
-    print("After global vars\n")
+    print("Welcom to Smart House\n")
 
     if(m_sec < 1.0):
         print('** For the workshop, please do not use lower than 1.0 for m_sec')
