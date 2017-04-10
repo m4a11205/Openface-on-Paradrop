@@ -8,7 +8,6 @@ import thread
 from flask import Flask
 from flask import request
 import openface
-import face_classifier
 
 try:
     import PIL
@@ -17,10 +16,10 @@ except Exception as e:
     print('No PIL, please install "python-imaging-library" if on OpenWrt')
     sys.exit(1)
 
-fileDir = os.path.dirname(os.path.realpath(__file__))
-modelDir = '/root/openface/models'
-dlibModelDir = os.path.join(modelDir, 'dlib')
-openfaceModelDir = os.path.join(modelDir, 'openface')
+##########################################################
+import face_classifier
+import LedControl
+##########################################################
 
 timeflt = lambda: time.time()
 
@@ -79,6 +78,7 @@ def create_app(ip, m_save, args, align, net):
         args.imgs = []
         args.imgs.append(fileName)
         scores = face_classifier.infer(args, align, net, args.multi)
+        LedControl.ledFlashGreen()
         return fileName
 
     return app
