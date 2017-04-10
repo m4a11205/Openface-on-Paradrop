@@ -30,20 +30,12 @@ def create_LED_App(bulb):
 
     @app.route('/flash/green')
     def ledFlashGreen():
-        for flashCnt in range(5):
-            bulb.setWarmWhite(1)
-            time.sleep(1.0)
-            bulb.setRgb(0,255,0)
-            time.sleep(1.0)
+        bulb.flashGreen()
         return "flash green"
 
     @app.route('/flash/red')
     def ledFlashRed():
-        for flashCnt in range(5):
-            bulb.setWarmWhite(1)
-            time.sleep(1.0)
-            bulb.setRgb(255,0,0)
-            time.sleep(1.0)
+        bulb.flashRed()
         return "flash red"
 
     @app.route('/json', methods=['GET', 'POST'])
@@ -232,6 +224,20 @@ class WifiLedBulb():
         msg.append(0x0f)
         self.__write(msg)
 
+    def flashGreen(self):
+        for flashCnt in range(5):
+            self.setWarmWhite(1)
+            time.sleep(1.0)
+            self.setRgb(0,255,0)
+            time.sleep(1.0)
+
+    def flashRed(self):
+        for flashCnt in range(5):
+            self.setWarmWhite(1)
+            time.sleep(1.0)
+            self.setRgb(255,0,0)
+            time.sleep(1.0)
+
     def __writeRaw(self, bytes):
         self.socket.send(bytes)
 
@@ -284,6 +290,8 @@ def connectBulb():
        thread.start_new_thread( run_LED_App, (bulb,) )
     except:
        print "Error: unable to start thread in LED control"
+
+    return bulb
 
 '''
 Main

@@ -29,7 +29,7 @@ THRESH_2 = 60.0
 
 #'''
 
-def create_app(ip, m_save, args, align, net):
+def create_app(ip, m_save, args, align, net, bulb):
     app = Flask(__name__)
 
     @app.route('/login', methods=['GET', 'POST'])
@@ -78,15 +78,15 @@ def create_app(ip, m_save, args, align, net):
         args.imgs = []
         args.imgs.append(fileName)
         scores = face_classifier.infer(args, align, net, args.multi)
-        LedControl.ledFlashGreen()
+        bulb.flashRed()
         return fileName
 
     return app
 
 #'''
-def run_app(ip, m_save, args, align, net):
+def run_app(ip, m_save, args, align, net, bulb):
     print("\nListen!!!\n")
-    app = create_app(ip, m_save, args, align, net)
+    app = create_app(ip, m_save, args, align, net, bulb)
     app.run(host = '0.0.0.0', port = 8011)
 #'''
 
