@@ -77,7 +77,8 @@ def create_app(ip, m_save, args, align, net, bulb):
         ## face recognition
         args.imgs = []
         args.imgs.append(fileName)
-        scores, people = face_classifier.infer(args, align, net, args.multi)
+        scores = face_classifier.infer(args, align, net, args.multi)
+        print scores
         bulb.flashRed()
         return fileName
 

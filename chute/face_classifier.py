@@ -111,7 +111,6 @@ def infer(args, align, net, multiple=False):
                 else:
                     scores.append(confidence)
                     people.append(person)
-                    print scores, people
                     print("Predict {} with {:.2f} confidence.".format(person, confidence))
 
                 if isinstance(clf, GMM):
@@ -120,4 +119,6 @@ def infer(args, align, net, multiple=False):
 
         except Exception as e:
             print('!! Warning: %s' % str(e))
+            
+            print scores, people
             return scores, people
