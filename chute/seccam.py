@@ -215,7 +215,20 @@ def surveillance(camIP, args):
     calib = args.calibrate
     m_sec = args.m_sec
     sens = args.m_sensitivity
-    
+
+    #Setup threshold for motion
+    #very sensitive
+    if(sens == 0):
+        thresh = THRESH_0
+    #kind of sensitive
+    elif(sens == 1):
+        thresh = THRESH_1
+    #not very sensitive
+    elif(sens == 2):
+        thresh = THRESH_2
+    else:
+        raise Exception('InvalidParam', 'm_sensitivity')
+
     oldjpg = None
     # Setup while loop requesting images from webcam
     while(True):
