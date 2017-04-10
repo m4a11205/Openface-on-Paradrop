@@ -77,7 +77,7 @@ def create_app(ip, m_save, args, align, net, bulb):
         ## face recognition
         args.imgs = []
         args.imgs.append(fileName)
-        scores = face_classifier.infer(args, align, net, args.multi)
+        scores, people = face_classifier.infer(args, align, net, args.multi)
         bulb.flashRed()
         return fileName
 
@@ -85,7 +85,7 @@ def create_app(ip, m_save, args, align, net, bulb):
 
 #'''
 def run_app(ip, m_save, args, align, net, bulb):
-    print("\nListen!!!\n")
+    print("\n WebCam App is ready !!!\n")
     app = create_app(ip, m_save, args, align, net, bulb)
     app.run(host = '0.0.0.0', port = 8011)
 #'''

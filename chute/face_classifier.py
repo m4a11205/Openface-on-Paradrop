@@ -89,6 +89,7 @@ def infer(args, align, net, multiple=False):
     for img in args.imgs:
         print("\n=== {} ===".format(img))
         scores = []
+        people = []
 
         try:
             reps = getRep(img, args, align, net, multiple)
@@ -109,12 +110,13 @@ def infer(args, align, net, multiple=False):
                     print("Predict {} @ x={} with {:.2f} confidence.".format(person, bbx, confidence))
                 else:
                     scores.append(confidence)
+                    people.append(person)
                     print("Predict {} with {:.2f} confidence.".format(person, confidence))
 
                 if isinstance(clf, GMM):
                     dist = np.linalg.norm(rep - clf.means_[maxI])
                     print("  + Distance from the mean: {}".format(dist))
-                    
+
         except Exception as e:
             print('!! Warning: %s' % str(e))
-            return scores
+            return scores, people
