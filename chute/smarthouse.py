@@ -8,8 +8,6 @@ import thread
 from flask import Flask
 from flask import request
 import openface
-import face_classifier
-import seccam
 
 try:
     import PIL
@@ -17,6 +15,13 @@ try:
 except Exception as e:
     print('No PIL, please install "python-imaging-library" if on OpenWrt')
     sys.exit(1)
+
+#############################
+import face_classifier
+import seccam
+import LedControl
+#############################
+
 
 fileDir = os.path.dirname(os.path.realpath(__file__))
 modelDir = '/root/openface/models'
@@ -111,17 +116,17 @@ if(__name__ == "__main__"):
     align = openface.AlignDlib(args.dlibFacePredictor)
     net = openface.TorchNeuralNet(args.networkModel, imgDim=args.imgDim, cuda=args.cuda)
 
+    # Run LED Controller App
+    LedControl.connectBulb()
 
+    '''
     # Get camera IP
     camIP = seccam.getCameraIP(m_sec)
     print("Found camIP %s" % camIP)
 
-    # Run camera app
+    # Run Camera App
     try:
        thread.start_new_thread( seccam.run_app, (camIP, m_save, args, align, net) )
     except:
        print "Error: unable to start seccam.run_app thread"
-
-    #while(True):
-    #   pass
-    seccam.surveillance(camIP, args, m_save)
+    '''
