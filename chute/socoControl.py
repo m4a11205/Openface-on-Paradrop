@@ -57,7 +57,7 @@ def connectSpeaker():
     try:
        thread.start_new_thread( run_SONO_App, (sonos, url) )
     except:
-       print "Error: unable to start thread in LED control"
+       print "Error: unable to start thread in Sonos Speaker Control"
 
     return sonos
 
