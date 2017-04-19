@@ -7,13 +7,32 @@ import StringIO
 import thread
 from flask import Flask
 from flask import request
-
 from soco import SoCo
+
 
 database = {'jack': 'http://ia801402.us.archive.org/20/items/TenD2005-07-16.flac16/TenD2005-07-16t10Wonderboy.mp3',
 'tom': 'http://fmn.rrimg.com/fmn059/audio/20140822/0210/m_mTCE_490d00001683125d.mp3'}
 
 ALARM_URL = 'http://ia801402.us.archive.org/20/items/TenD2005-07-16.flac16/TenD2005-07-16t10Wonderboy.mp3'
+
+
+'''
+Flask web interface
+'''
+def create_SONO_App(sonos):
+    app = Flask(__name__)
+
+    @app.route('/alarm')
+    def alarm():
+        sonos.alarm()
+        return "SONO alarm"
+
+
+def run_SONO_App(sonos):
+    print("\n SONO Speaker Controller App is ready !!!\n")
+    app = create_SONO_App(sonos)
+    app.run(host = '0.0.0.0', port = 8015)
+
 
 class SonoController():
     def __init__(self, ip):
@@ -38,35 +57,14 @@ class SonoController():
         self.core.play_uri(ALARM_URL)
 
 
-def create_SONO_App(sonos, url):
-    app = Flask(__name__)
-
-    @app.route('/play_uri')
-    def play_uri():
-        sonos.play_uri(url)
-        return "SONO play_uri"
-
-    @app.route('/alarm')
-    def alarm():
-        sonos.alarm()
-        return "SONO alarm"
-
-
-def run_SONO_App(sonos, url):
-    print("\n SONO Speaker Controller App is ready !!!\n")
-    app = create_SONO_App(sonos, url)
-    app.run(host = '0.0.0.0', port = 8015)
-
-
 def connectSpeaker():
     sono_ip = "192.168.128.181"
-    #sonos = SoCo(sono_ip) # Pass in the IP of your Sonos speaker
     sonos = SonoController(sono_ip)
     url = 'http://ia801402.us.archive.org/20/items/TenD2005-07-16.flac16/TenD2005-07-16t10Wonderboy.mp3'
 
     ## start multi-thread to listening the flask packet
     try:
-       thread.start_new_thread( run_SONO_App, (sonos, url) )
+       thread.start_new_thread( run_SONO_App, (sonos,) )
     except:
        print "Error: unable to start thread in Sonos Speaker Control"
 
