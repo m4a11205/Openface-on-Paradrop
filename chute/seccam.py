@@ -80,8 +80,8 @@ def create_app(ip, m_save, args, align, net, bulb, sonos):
 
         if( len(people) > 0):
             print scores, people
-            bulb.flashRed()
-            sonos.alarm()
+            thread.start_new_thread( bulb.flashRed, () )
+            thread.start_new_thread( sonos.alarm, () )
 
         return fileName
 
