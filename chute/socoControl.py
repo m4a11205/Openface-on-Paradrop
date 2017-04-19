@@ -62,7 +62,7 @@ class SonoController():
 
     def alarm(self):
         self.play_uri(ALARM_URL)
-        time.sleep(6.0)
+        time.sleep(8.0)
         self.pause()
 
 
