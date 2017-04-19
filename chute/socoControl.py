@@ -26,6 +26,8 @@ def create_SONO_App(sonos):
     def alarm():
         sonos.alarm()
         return "SONO alarm"
+        
+    return app
 
 
 def run_SONO_App(sonos):
