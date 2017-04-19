@@ -14,7 +14,7 @@ URL_BASE = {'ted': 'http://ia801402.us.archive.org/20/items/TenD2005-07-16.flac1
 'sean': 'http://fmn.rrimg.com/fmn059/audio/20140822/0210/m_mTCE_490d00001683125d.mp3'}
 
 # https://docs.google.com/uc?export=open&id=0BwZNdRbemZmsSndXUWRmOVQxaXc
-ALARML_URL = 'http://gdurl.com/5lI7'
+ALARML_URL = 'http://soundbible.com/mp3/School_Fire_Alarm-Cullen_Card-202875844.mp3'
 U0 = 'http://fmn.rrimg.com/fmn059/audio/20140822/0210/m_mTCE_490d00001683125d.mp3'
 
 U1 = 'http://gdurl.com/5lI7'
