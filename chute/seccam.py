@@ -29,7 +29,7 @@ THRESH_2 = 60.0
 
 #'''
 
-def create_app(ip, m_save, args, align, net, bulb):
+def create_app(ip, m_save, args, align, net, bulb, sonos):
     app = Flask(__name__)
 
     @app.route('/login', methods=['GET', 'POST'])
@@ -80,14 +80,15 @@ def create_app(ip, m_save, args, align, net, bulb):
         scores, people = face_classifier.infer(args, align, net, args.multi)
         print scores, people
         bulb.flashRed()
+        sonos.alarm()
         return fileName
 
     return app
 
 #'''
-def run_app(ip, m_save, args, align, net, bulb):
+def run_app(ip, m_save, args, align, net, bulb, sonos):
     print("\n WebCam App is ready !!!\n")
-    app = create_app(ip, m_save, args, align, net, bulb)
+    app = create_app(ip, m_save, args, align, net, bulb, sonos)
     app.run(host = '0.0.0.0', port = 8011)
 #'''
 

@@ -20,6 +20,7 @@ except Exception as e:
 import face_classifier
 import seccam
 import LedControl
+import socoControl
 ##########################################################
 
 
@@ -120,6 +121,10 @@ if(__name__ == "__main__"):
     # Run LED Controller App
     bulb = LedControl.connectBulb()
 
+    ######################### Speaker ############################
+    # Run Speaker Controller App
+    sonos = socoControl.connectSpeaker()
+
     ###################### WebCam ############################
     # Get camera IP
     camIP = seccam.getCameraIP(m_sec)
@@ -127,7 +132,7 @@ if(__name__ == "__main__"):
 
     # Run Camera App
     try:
-       thread.start_new_thread( seccam.run_app, (camIP, m_save, args, align, net, bulb) )
+       thread.start_new_thread( seccam.run_app, (camIP, m_save, args, align, net, bulb, sonos) )
     except:
        print "Error: unable to start seccam.run_app thread"
 
