@@ -86,7 +86,9 @@ def create_app(ip, m_save, args, align, net, bulb, sonos):
             thread.start_new_thread( bulb.flashRed, () )
             thread.start_new_thread( sonos.play_by_userName, (name,) )
 
-        return fileName
+            prdiction = ("Predict {} @ x={} with {:.2f} confidence.\n".format(person, bbx, confidence))
+
+        return prdiction + fileName
 
     return app
 
