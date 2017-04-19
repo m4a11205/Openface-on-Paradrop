@@ -77,9 +77,12 @@ def create_app(ip, m_save, args, align, net, bulb, sonos):
         args.imgs = []
         args.imgs.append(fileName)
         scores, people = face_classifier.infer(args, align, net, args.multi)
-        print scores, people
-        bulb.flashRed()
-        sonos.alarm()
+
+        if( len(people) > 0):
+            print scores, people
+            bulb.flashRed()
+            sonos.alarm()
+
         return fileName
 
     return app

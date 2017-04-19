@@ -83,13 +83,14 @@ def getRep(imgPath, args, align, net, multiple):
 
 
 def infer(args, align, net, multiple=False):
+    scores = []
+    people = []
+
     with open(args.classifierModel, 'r') as f:
         (le, clf) = pickle.load(f)
 
     for img in args.imgs:
         print("\n=== {} ===".format(img))
-        scores = []
-        people = []
 
         try:
             reps = getRep(img, args, align, net, multiple)
