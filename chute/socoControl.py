@@ -49,7 +49,7 @@ def create_SONO_App(sonos, url):
 def run_SONO_App(sonos, url):
     print("\n SONO Speaker Controller App is ready !!!\n")
     app = create_SONO_App(sonos, url)
-    app.run(host = '0.0.0.0', port = 8013)
+    app.run(host = '0.0.0.0', port = 8015)
 
 
 def connectSpeaker():
