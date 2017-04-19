@@ -27,6 +27,11 @@ def create_SONO_App(sonos):
         sonos.alarm()
         return "SONO alarm"
 
+    @app.route('/pause')
+    def alarm():
+        sonos.pause()
+        return "SONO pause"
+
     return app
 
 
