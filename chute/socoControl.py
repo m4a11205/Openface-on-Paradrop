@@ -14,7 +14,11 @@ URL_BASE = {'ted': 'http://ia801402.us.archive.org/20/items/TenD2005-07-16.flac1
 'sean': 'http://fmn.rrimg.com/fmn059/audio/20140822/0210/m_mTCE_490d00001683125d.mp3'}
 
 # https://docs.google.com/uc?export=open&id=0BwZNdRbemZmsSndXUWRmOVQxaXc
-ALARM_URL = 'https://doc-0s-1c-docs.googleusercontent.com/docs/securesc/k1l30dqt5if47s6mk1q6p781m5iiacou/mnmaplbcs0ba9crreekco3aii0vf1jg3/1492639200000/16833314890502965928/07943079572234079811/0BwZNdRbemZmsSndXUWRmOVQxaXc?e=open'
+ALARML_URL = 'https://doc-0s-1c-docs.googleusercontent.com/docs/securesc/k1l30dqt5if47s6mk1q6p781m5iiacou/mnmaplbcs0ba9crreekco3aii0vf1jg3/1492639200000/16833314890502965928/07943079572234079811/0BwZNdRbemZmsSndXUWRmOVQxaXc?e=open.mp3
+'
+U0 = 'http://fmn.rrimg.com/fmn059/audio/20140822/0210/m_mTCE_490d00001683125d.mp3'
+U1 = 'https://doc-0k-1c-docs.googleusercontent.com/docs/securesc/k1l30dqt5if47s6mk1q6p781m5iiacou/i7lml7f9067jes778ujrd4g6nqkf42er/1492639200000/16833314890502965928/07943079572234079811/0BwZNdRbemZmsVENyem8tR1ZaZ2s?e=open'
+U2 = 'https://doc-0k-1c-docs.googleusercontent.com/docs/securesc/k1l30dqt5if47s6mk1q6p781m5iiacou/i7lml7f9067jes778ujrd4g6nqkf42er/1492639200000/16833314890502965928/07943079572234079811/0BwZNdRbemZmsVENyem8tR1ZaZ2s?e=open.mp3'
 
 
 '''
@@ -92,7 +96,11 @@ if __name__ == '__main__':
 
     # Pass in a URI to a media file to have it streamed through the Sonos
     # speaker
-    sonos.play_uri(ALARM_URL)
+    #sonos.play_uri(ALARM_URL)
+    sonos.play_uri(U0)
+    #sonos.play_uri(U1)
+    #sonos.play_uri(U2)
+
 
     #track = sonos.get_current_track_info()
 
