@@ -53,7 +53,7 @@ def run_SONO_App(sonos, url):
 
 
 def connectSpeaker():
-    sono_ip = "192.168.128.187"
+    sono_ip = "192.168.128.181"
     #sonos = SoCo(sono_ip) # Pass in the IP of your Sonos speaker
     sonos = SonoController(sono_ip)
     url = 'http://ia801402.us.archive.org/20/items/TenD2005-07-16.flac16/TenD2005-07-16t10Wonderboy.mp3'
