@@ -68,7 +68,9 @@ def connectSpeaker():
 
 
 if __name__ == '__main__':
-    sonos = SoCo('192.168.128.181') # Pass in the IP of your Sonos speaker
+    sono_ip = "192.168.128.181"
+    #sonos = SoCo(sono_ip) # Pass in the IP of your Sonos speaker
+    sonos = SonoController(sono_ip)
     # You could use the discover function instead, if you don't know the IP
 
     # Pass in a URI to a media file to have it streamed through the Sonos
@@ -78,13 +80,14 @@ if __name__ == '__main__':
 
     track = sonos.get_current_track_info()
 
-    print track['title']
-    print sonos.player_name()
-    sonos.pause()
+    #print track['title']
+    #print sonos.player_name()
+    #sonos.pause()
 
     # Play a stopped or paused track
-    sonos.play()
-    print sonos.queue_size
+    #sonos.play()
+    #print sonos.queue_size
+
 #    speaker = sonos.get_speaker_info()  # get speaker info
 #    print speaker['model_name']     # print speaker info
     '''
