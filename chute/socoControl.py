@@ -13,7 +13,7 @@ from soco import SoCo
 URL_BASE = {'ted': 'http://ia801402.us.archive.org/20/items/TenD2005-07-16.flac16/TenD2005-07-16t10Wonderboy.mp3',
 'sean': 'http://fmn.rrimg.com/fmn059/audio/20140822/0210/m_mTCE_490d00001683125d.mp3'}
 
-ALARM_URL = 'https://drive.google.com/file/d/0BwZNdRbemZmsaWgzR1ZUWXZSQVk'
+ALARM_URL = 'https://docs.google.com/uc?export=open&id=0BwZNdRbemZmsSndXUWRmOVQxaXc'
 
 
 '''
