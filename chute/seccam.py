@@ -77,6 +77,7 @@ def create_app(ip, m_save, args, align, net, bulb, sonos):
         args.imgs = []
         args.imgs.append(fileName)
         scores, people = face_classifier.infer(args, align, net, args.multi)
+        prediction = ""
 
         if( len(people) > 0):
             score = scores[0]
@@ -86,7 +87,7 @@ def create_app(ip, m_save, args, align, net, bulb, sonos):
             thread.start_new_thread( bulb.flashRed, () )
             thread.start_new_thread( sonos.play_by_userName, (name,) )
 
-            prediction = "Predict " + name + " with confidence" + score + "\n"
+            prediction = 'Predict %s with confidence %.2f' % (name, score)
 
         return prediction + fileName
 
