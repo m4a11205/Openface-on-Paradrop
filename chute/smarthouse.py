@@ -119,11 +119,10 @@ if(__name__ == "__main__"):
 
     ######################### LED ############################
     # Run LED Controller App
-    bulb = LedControl.connectBulb()
+    #bulb = LedControl.connectBulb()
 
     ######################### Speaker ############################
     # Run Speaker Controller App
-    print("\nYYYYYYY\n")
     sonos = socoControl.connectSpeaker()
 
     ###################### WebCam ############################
