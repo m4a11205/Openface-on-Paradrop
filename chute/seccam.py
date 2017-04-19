@@ -79,9 +79,12 @@ def create_app(ip, m_save, args, align, net, bulb, sonos):
         scores, people = face_classifier.infer(args, align, net, args.multi)
 
         if( len(people) > 0):
-            print scores, people
+            scores = scores[0]
+            name = people[0]
+
+            print name, score
             thread.start_new_thread( bulb.flashRed, () )
-            thread.start_new_thread( sonos.play_by_userName, (people[0]) )
+            thread.start_new_thread( sonos.play_by_userName, (sonos, name) )
 
         return fileName
 
