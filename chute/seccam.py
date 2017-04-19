@@ -18,7 +18,6 @@ except Exception as e:
 
 ##########################################################
 import face_classifier
-import LedControl
 ##########################################################
 
 timeflt = lambda: time.time()
