@@ -26,7 +26,7 @@ def create_SONO_App(sonos):
     def alarm():
         sonos.alarm()
         return "SONO alarm"
-        
+
     return app
 
 
@@ -56,7 +56,9 @@ class SonoController():
         self.core.volume = val
 
     def alarm(self):
-        self.core.play_uri(ALARM_URL)
+        self.play_uri(ALARM_URL)
+        time.sleep(10.0)
+        self.pause()
 
 
 def connectSpeaker():

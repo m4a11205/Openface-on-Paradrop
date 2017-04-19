@@ -119,7 +119,7 @@ if(__name__ == "__main__"):
 
     ######################### LED ############################
     # Run LED Controller App
-    #bulb = LedControl.connectBulb()
+    bulb = LedControl.connectBulb()
 
     ######################### Speaker ############################
     # Run Speaker Controller App
@@ -127,7 +127,7 @@ if(__name__ == "__main__"):
 
     ###################### WebCam ############################
     # Get camera IP
-    '''
+
     camIP = seccam.getCameraIP(m_sec)
     print("Found camIP %s" % camIP)
 
@@ -136,7 +136,7 @@ if(__name__ == "__main__"):
        thread.start_new_thread( seccam.run_app, (camIP, m_save, args, align, net, bulb, sonos) )
     except:
        print "Error: unable to start seccam.run_app thread"
-    '''
+       
 
     '''
     # Run Camera Surveillance
