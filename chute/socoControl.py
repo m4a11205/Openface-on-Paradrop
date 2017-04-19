@@ -10,8 +10,8 @@ from flask import request
 from soco import SoCo
 
 
-database = {'jack': 'http://ia801402.us.archive.org/20/items/TenD2005-07-16.flac16/TenD2005-07-16t10Wonderboy.mp3',
-'tom': 'http://fmn.rrimg.com/fmn059/audio/20140822/0210/m_mTCE_490d00001683125d.mp3'}
+URL_BASE = {'ted': 'http://ia801402.us.archive.org/20/items/TenD2005-07-16.flac16/TenD2005-07-16t10Wonderboy.mp3',
+'sean': 'http://fmn.rrimg.com/fmn059/audio/20140822/0210/m_mTCE_490d00001683125d.mp3'}
 
 ALARM_URL = 'http://ia801402.us.archive.org/20/items/TenD2005-07-16.flac16/TenD2005-07-16t10Wonderboy.mp3'
 
@@ -48,6 +48,10 @@ class SonoController():
     def play_uri(self, url):
         self.core.play_uri(url)
 
+    def play_by_userName(self, name):
+        url = URL_BASE[name]
+        self.core.play_uri(url)
+
     def pause(self):
         self.core.pause()
 
@@ -69,7 +73,6 @@ class SonoController():
 def connectSpeaker():
     sono_ip = "192.168.128.181"
     sonos = SonoController(sono_ip)
-    url = 'http://ia801402.us.archive.org/20/items/TenD2005-07-16.flac16/TenD2005-07-16t10Wonderboy.mp3'
 
     ## start multi-thread to listening the flask packet
     try:
