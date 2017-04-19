@@ -1,7 +1,13 @@
 import socket
 import time
+import sys, math, os, string, time, argparse, json, subprocess
+import httplib
+import base64
+import StringIO
+import thread
 from flask import Flask
 from flask import request
+
 from soco import SoCo
 
 database = {'jack': 'http://ia801402.us.archive.org/20/items/TenD2005-07-16.flac16/TenD2005-07-16t10Wonderboy.mp3',
