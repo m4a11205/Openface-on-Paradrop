@@ -49,7 +49,7 @@ class SonoController():
         self.core.play_uri(url)
 
     def pause(self):
-        self.core.pause
+        self.core.pause()
 
     def mute(self):
         self.core.mute = True
