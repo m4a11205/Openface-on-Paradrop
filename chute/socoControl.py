@@ -40,6 +40,11 @@ def create_SONO_App(sonos, url):
         sonos.play_uri(url)
         return "SONO play_uri"
 
+    @app.route('/alarm')
+    def alarm():
+        sonos.alarm()
+        return "SONO alarm"
+
 
 def run_SONO_App(sonos, url):
     print("\n SONO Speaker Controller App is ready !!!\n")
