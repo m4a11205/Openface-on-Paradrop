@@ -57,7 +57,7 @@ class SonoController():
     def play_by_userName(self, name):
         url = URL_BASE.get('name',"Unknown")
         if (url == "Unknown"):
-            self.core.alarm()
+            self.core.play_uri(ALARM_URL)
         else:
             self.core.play_uri(url)
 
