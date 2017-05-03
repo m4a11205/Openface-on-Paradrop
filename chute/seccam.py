@@ -84,9 +84,12 @@ def create_app(ip, m_save, args, align, net, bulb, sonos):
             name  = people[0]
 
             print name, score
+            #if (score > 0.6):
             thread.start_new_thread( bulb.flashRed, () )
             thread.start_new_thread( sonos.play_by_userName, (name,) )
-
+            #else:
+            # thread.start_new_thread( bulb.flashGreen, () )
+            # thread.start_new_thread( sonos.alarm, () )
             prediction = 'Predict %s with confidence %.2f\n' % (name, score)
 
         return prediction + fileName
