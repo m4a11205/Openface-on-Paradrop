@@ -1,7 +1,7 @@
 #  - Finds ip address webcam - used for detecting motion
 # Version 1.10.00
-#FROM m4a11205/paradrop-openface-base
-FROM m4a11205/paradrop-smartbase
+#FROM m4a11205/paradrop-smartbase
+FROM m4a11205/paradrop-smartbase-multi
 MAINTAINER Paradrop Team <info@paradrop.io>
 
 # Install dependencies.  You can add additional packages here following the example.
@@ -17,7 +17,7 @@ MAINTAINER Paradrop Team <info@paradrop.io>
 
 # Install Flask
 # RUN pip install Flask
-RUN pip install soco
+# RUN pip install soco
 
 
 # Apache site configuration
