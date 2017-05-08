@@ -1,22 +1,4 @@
 #!/usr/bin/env python2
-#
-# Example to classify faces.
-# Brandon Amos
-# 2015/10/11
-#
-# Copyright 2015-2016 Carnegie Mellon University
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
 
 import time
 
@@ -43,6 +25,14 @@ from sklearn.grid_search import GridSearchCV
 from sklearn.mixture import GMM
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.naive_bayes import GaussianNB
+
+clfChoices = [
+    'LinearSvm',
+    'RadialSvm',
+    'GaussianNB',
+    'Forest',
+    'Logic',
+    ]
 
 
 def getRep(imgPath, args, align, net, multiple):
@@ -86,7 +76,7 @@ def infer(args, align, net, multiple=False):
     scores = []
     people = []
 
-    with open(args.classifierModel, 'r') as f:
+    with open(os.path.join(args.classifierModel, "classifier.pkl"), 'r') as f:
         (le, clf) = pickle.load(f)
 
     for img in args.imgs:
@@ -107,6 +97,10 @@ def infer(args, align, net, multiple=False):
                 person = le.inverse_transform(maxI)
                 confidence = predictions[maxI]
 
+                if(confidence < 0.5 ):
+                    person = 'Unknown'
+                    confidence = 100
+
                 if multiple:
                     print("Predict {} @ x={} with {:.2f} confidence.".format(person, bbx, confidence))
                 else:
@@ -122,3 +116,72 @@ def infer(args, align, net, multiple=False):
         except Exception as e:
             print('!! Warning: %s' % str(e))
             return scores, people
+
+
+def inferMulti(args, align, net):
+    scores = []
+    people = []
+    threshold = -1;
+    votes = {}
+
+    for clfChoice in clfChoices:
+        print "\n==============="
+        print "Using the classifier: " + clfChoice
+
+        with open(os.path.join(args.classifierModel, clfChoice + ".pkl"), 'r') as f_clf:
+            (le, clf) = pickle.load(f_clf)
+
+        for img in args.imgs:
+            try:
+                reps = getRep(img, args, align, net, False)
+                rep = reps[0][1].reshape(1, -1)
+            except Exception as e:
+                print('!! Warning: %s' % str(e))
+                return scores, people
+
+            predictions = clf.predict_proba(rep).ravel()
+            maxI = np.argmax(predictions)
+            person = le.inverse_transform(maxI)
+            confidence = predictions[maxI]
+
+            print person, confidence
+
+            if clfChoice == 'LinearSvm':
+                threshold = 0.45
+            elif clfChoice == 'RadialSvm':  # Radial Basis Function kernel
+                threshold = 0.4
+            elif clfChoice == 'GaussianNB':
+                threshold = 0.9
+            elif clfChoice == 'Forest':
+                threshold = 0.55
+            elif clfChoice == 'Logic':
+                threshold = 0.5
+
+            if(confidence < threshold ):
+                person = 'Unknown'
+
+            cnt = votes.get(person)
+            if(cnt is None):
+                votes[person] = 1
+            else:
+                votes[person] = cnt + 1
+
+    # get majority vote
+    maxNum = -1;
+    maxName= None;
+    for name, num in votes.iteritems():
+        if (num > maxNum):
+            maxNum = num
+            maxName = name
+
+    print maxName, maxNum
+
+    if(maxNum < (len(clfChoices)+1)/2):
+        maxName = 'Unknown'
+        maxNum  = len(clfChoices) - maxNum
+
+    scores.append( float (maxNum)/ len(clfChoices))
+    people.append(maxName)
+
+    print votes
+    return scores, people
