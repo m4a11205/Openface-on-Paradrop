@@ -1,10 +1,11 @@
-# Openface-on-Paradrop
+# Project Title
+SmartHouse - A mobile app combine with Paradrop smart router, a webcam, and a LED bulb that forms an IOT prototype.
 
----
-# Train Face Recognition Classifier
-+ %% pull the docker image 
+## How to train face-recognition classifier
++ pull the docker image
+```
 docker pull m4a11205/paradrop-smartbase-multi
-
+```
 + docker run -v /Users:/link/Users -p 9000:9000 -p 8000:8000 -t -i m4a11205/paradrop-smartbase-multi /bin/bash
 
 + cd /root/openface
@@ -18,4 +19,6 @@ docker pull m4a11205/paradrop-smartbase-multi
 + ./demos/classifier_multi.py train ./generated-embeddings/
 
 + cp -f ./generated-embeddings/*.pkl /link/Users/Openface-on-Paradrop/chute/.
----
+
+## License
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
