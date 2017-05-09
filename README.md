@@ -2,7 +2,8 @@
 SmartHouse - A mobile app combine with Paradrop smart router, a webcam, and a LED bulb that forms an IOT prototype.
 
 ## How to train face-recognition classifier
-+ pull the docker image
+
+1. Pull and download the docker image
 ```
 docker pull m4a11205/paradrop-smartbase-multi
 ```
