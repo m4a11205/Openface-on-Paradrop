@@ -1,4 +1,4 @@
-# Smart House for Paradrop
+# SmartHouse for Paradrop
 "SmartHouse" is a system combine with Paradrop smart router, a webcam, a SONOS speaker and a Flux LED bulb that forms an IoT prototype. It cantains a Paradrop chute and a mobile app. The following features has been developed so far:
   * Real-time Video Stream
   * Take photo of the video stream
@@ -11,40 +11,39 @@
 Wireless security cam that can connect to the Paradrop router. Sonos wireless speaker. FluxSmart WiFi LED Light Bulb.
 
 ## Description:
-a description of smart house
-80
-81
-8000
-8010
-8011: Camera
-8012: Led bulb
-8013
-8014
-8015: SONOS speaker
-8500
-9000
-
+a description of smart house  
+80  
+81  
+8000  
+8010  
+8011: Camera  
+8012: Led bulb  
+8013  
+8014  
+8015: SONOS speaker  
+8500  
+9000  
 
 ##Files
 
 Dockerfile: load docker image
-seccam.py: Takes in three arguments for caliberation, time and sensitivity. According to these parameter, the security camera takes pictures each time it detects motion and saves it on the router for future reference.
-LedControl.py	
-smarthouse.py
-socoControl.py
-test_soco.py
-run.sh
+seccam.py: Takes in three arguments for caliberation, time and sensitivity. According to these parameter, the security camera takes pictures each time it detects motion and saves it on the router for future reference.  
+LedControl.py  
+smarthouse.py  
+socoControl.py  
+test_soco.py  
+run.sh  
 
-face_classifier.py	
-haarcascade_frontalface_default.xml	
-multi.py
+face_classifier.py	 
+haarcascade_frontalface_default.xml	 
+multi.py  
 
-Forest.pkl	
-GaussianNB.pkl	
-LinearSvm.pkl	
-Logic.pkl
-RadialSvm.pkl
-classifier.pkl
+Forest.pkl  	
+GaussianNB.pkl	 
+LinearSvm.pkl	 
+Logic.pkl  
+RadialSvm.pkl  
+classifier.pkl  
 
 ## Getting started
 
