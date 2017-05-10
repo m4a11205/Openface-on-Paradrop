@@ -11,7 +11,28 @@
 Wireless security cam that can connect to the Paradrop router. Sonos wireless speaker. FluxSmart WiFi LED Light Bulb.
 
 ## Description:
-a description of smart house  
+The concept of smart home developed rapidly. However, massive types of control protocols make it difficult to combine devices together for a cooperative work. In this case, Paradrop would provides a secure and smart way to coordinate multiple devices.  
+We build a Paradrop chute that could control wireless camera, a led bulb and a wireless speaker through a mobile app. This chute also embedded a Openface lib.  
+
+##Files
+
+Dockerfile: load docker image
+seccam.py: Takes in three arguments for caliberation, time and sensitivity. According to these parameter, the security camera takes pictures each time it detects motion and saves it on the router for future reference.  
+LedControl.py: control led bulb  
+smarthouse.py: main file, initialize default settings, get connection to speaker, led bulb and camera  
+socoControl.py: control SONOS speaker  
+test_soco.py  
+run.sh  
+face_classifier.py: run face recognition alogrithm  
+haarcascade_frontalface_default.xml  
+multi.py: multi-classifier for a majority vote of the recognition result  
+Forest.pkl: Random forests ensemble learning method for classification, regression  
+GaussianNB.pkl: Gaussian Naive Bayes classifiers  
+LinearSvm.pkl: Linear Support vector machine classifiers  
+Logic.pkl:Inductive logic programming classifiers  
+RadialSvm.pkl: Radial Support vector machine classifiers  
+classifier.pkl: Default classifier is linear SVM  
+##ports exposed:  
 80  
 81  
 8000  
@@ -23,25 +44,6 @@ a description of smart house
 8015: SONOS speaker  
 8500  
 9000  
-
-##Files
-
-Dockerfile: load docker image
-seccam.py: Takes in three arguments for caliberation, time and sensitivity. According to these parameter, the security camera takes pictures each time it detects motion and saves it on the router for future reference.  
-LedControl.py  
-smarthouse.py  
-socoControl.py  
-test_soco.py  
-run.sh  
-face_classifier.py  
-haarcascade_frontalface_default.xml  
-multi.py  
-Forest.pkl  
-GaussianNB.pkl  
-LinearSvm.pkl  
-Logic.pkl  
-RadialSvm.pkl  
-classifier.pkl  
 ## Getting started
 
 
