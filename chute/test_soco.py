@@ -11,14 +11,11 @@ from soco import SoCo
 
 
 URL_BASE = {'ted': 'http://ia801402.us.archive.org/20/items/TenD2005-07-16.flac16/TenD2005-07-16t10Wonderboy.mp3',
-'Sean': 'http://fmn.rrimg.com/fmn059/audio/20140822/0210/m_mTCE_490d00001683125d.mp3',
-'Unknown': 'Unknown'
-}
-
+'sean': 'http://fmn.rrimg.com/fmn059/audio/20140822/0210/m_mTCE_490d00001683125d.mp3'}
 
 # https://docs.google.com/uc?export=open&id=0BwZNdRbemZmsSndXUWRmOVQxaXc
-ALARM_URL = 'http://soundbible.com/mp3/School_Fire_Alarm-Cullen_Card-202875844.mp3'
-U0 = 'http://fmn.rrimg.com/fmn059/audio/20140822/0210/m_mTCE_490d00001683125d.mp3'
+ALARML_URL = 'http://gdurl.com/5lI7'
+U0 = 'https://doc-10-7k-docs.googleusercontent.com/docs/securesc/ha0ro937gcuc7l7deffksulhg5h7mbp1/87d1kuv0ghqscgj1hg904467vq6bolss/1492639200000/16833314890502965928/*/0BwZNdRbemZmsVENyem8tR1ZaZ2s'
 
 U1 = 'http://gdurl.com/5lI7'
 
@@ -58,11 +55,8 @@ class SonoController():
         self.core.play_uri(url)
 
     def play_by_userName(self, name):
-        url = URL_BASE.get(name,"Unknown")
-        if (url == "Unknown"):
-            self.core.play_uri(ALARM_URL)
-        else:
-            self.core.play_uri(url)
+        url = URL_BASE[name]
+        self.core.play_uri(url)
 
     def pause(self):
         self.core.pause()
@@ -97,7 +91,6 @@ def connectSpeaker():
 
 if __name__ == '__main__':
     sono_ip = "192.168.128.181"
-    #sonos = SoCo(sono_ip) # Pass in the IP of your Sonos speaker
     sonos = SonoController(sono_ip)
     # You could use the discover function instead, if you don't know the IP
 
@@ -105,29 +98,4 @@ if __name__ == '__main__':
     # speaker
     #sonos.play_uri(ALARM_URL)
     sonos.play_uri(U0)
-    #sonos.play_uri(U1)
-    #sonos.play_uri(U2)
-
-
-    #track = sonos.get_current_track_info()
-
-    #print track['title']
-    #print sonos.player_name()
     #sonos.pause()
-
-    # Play a stopped or paused track
-    #sonos.play()
-    #print sonos.queue_size
-
-#    speaker = sonos.get_speaker_info()  # get speaker info
-#    print speaker['model_name']     # print speaker info
-    '''
-    zone_name, player_icon, uid, serial_number, software_version,
-    hardware_version, model_number, model_name, display_version
-    mac_address
-    '''
-#    sonos.seek('00:00:50') # seek spicific time to play
-#    print sonos.mute   # return status of mute
-#    sonos.mute = True   # mute
-#    sonos.mute = False  # unmute
-#    sonos.volume = 50  # set volume

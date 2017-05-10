@@ -76,20 +76,20 @@ def create_app(ip, m_save, args, align, net, bulb, sonos):
         ## face recognition
         args.imgs = []
         args.imgs.append(fileName)
-        scores, people = face_classifier.infer(args, align, net, args.multi)
+        #scores, people = face_classifier.infer(args, align, net, args.multi)
+        scores, people = face_classifier.inferMulti(args, align, net)
         prediction = ""
 
         if( len(people) > 0):
             score = scores[0]
             name  = people[0]
 
-            print name, score
-            #if (score > 0.6):
-            thread.start_new_thread( bulb.flashRed, () )
-            thread.start_new_thread( sonos.play_by_userName, (name,) )
-            #else:
-            # thread.start_new_thread( bulb.flashGreen, () )
-            # thread.start_new_thread( sonos.alarm, () )
+            if(name == 'Unknown'):
+                thread.start_new_thread( bulb.flashRed, () )
+                thread.start_new_thread( sonos.alarm, () )
+            else:
+                thread.start_new_thread( sonos.play_by_userName, (name,) )
+
             prediction = 'Predict %s with confidence %.2f\n' % (name, score)
 
         return prediction + fileName
