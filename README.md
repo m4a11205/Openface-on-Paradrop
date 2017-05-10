@@ -33,11 +33,9 @@ smarthouse.py
 socoControl.py  
 test_soco.py  
 run.sh  
-
 face_classifier.py	 
 haarcascade_frontalface_default.xml	 
 multi.py  
-
 Forest.pkl  	
 GaussianNB.pkl	 
 LinearSvm.pkl	 
