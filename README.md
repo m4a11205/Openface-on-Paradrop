@@ -14,7 +14,7 @@ Wireless security cam that can connect to the Paradrop router. Sonos wireless sp
 The concept of smart home developed rapidly. However, massive types of control protocols make it difficult to combine devices together for a cooperative work. In this case, Paradrop would provides a secure and smart way to coordinate multiple devices.  
 We build a Paradrop chute that could control wireless camera, a led bulb and a wireless speaker through a mobile app. This chute also embedded a Openface lib.  
 
-##Files
+## Files
 
 Dockerfile: load docker image
 seccam.py: Takes in three arguments for caliberation, time and sensitivity. According to these parameter, the security camera takes pictures each time it detects motion and saves it on the router for future reference.  
@@ -32,7 +32,9 @@ LinearSvm.pkl: Linear Support vector machine classifiers
 Logic.pkl:Inductive logic programming classifiers  
 RadialSvm.pkl: Radial Support vector machine classifiers  
 classifier.pkl: Default classifier is linear SVM  
-##ports exposed:  
+
+## ports exposed:  
+
 80  
 81  
 8000  
@@ -91,3 +93,6 @@ cp -f ./generated-embeddings/*.pkl /link/LocalPath/Openface-on-Paradrop/chute/.
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Setting Flux Bulb and SONOS Speaker IP Address
+Currently we just use fixed IP address for bulb and speaker. We need to change the default setting if wireless network environment changes. 
