@@ -49,6 +49,7 @@ We build a Paradrop chute that could control wireless camera, a led bulb and a w
 Fork this project to your own github account.  
 Change the run.sh for tweaking the parameters.  
 ![alt text][logo]
+
 [logo]: https://github.com/m4a11205/Openface-on-Paradrop/blob/master/sample.png "instruction of setting"
 
 ## How to train face-recognition classifier
