@@ -8,7 +8,9 @@
   * Play different music according to the results of facial recognition
 
 ## Requirements:
-Wireless security cam that can connect to the Paradrop router. Sonos wireless speaker. FluxSmart WiFi LED Light Bulb.
+  * Wireless security cam that can connect to the Paradrop router.
+  * Sonos wireless speaker.
+  * FluxSmart WiFi LED Light Bulb.
 
 ## Description:
 The concept of smart home developed rapidly. However, massive types of control protocols make it difficult to combine devices together for a cooperative work. In this case, Paradrop would provides a secure and smart way to coordinate multiple devices.  
@@ -16,38 +18,38 @@ We build a Paradrop chute that could control wireless camera, a led bulb and a w
 
 ## Files
 
-Dockerfile: load docker image
-seccam.py: Takes in three arguments for caliberation, time and sensitivity. According to these parameter, the security camera takes pictures each time it detects motion and saves it on the router for future reference.  
-LedControl.py: control led bulb  
-smarthouse.py: main file, initialize default settings, get connection to speaker, led bulb and camera  
-socoControl.py: control SONOS speaker  
-test_soco.py  
-run.sh  
-face_classifier.py: run face recognition alogrithm  
-haarcascade_frontalface_default.xml  
-multi.py: multi-classifier for a majority vote of the recognition result  
-Forest.pkl: Random forests ensemble learning method for classification, regression  
-GaussianNB.pkl: Gaussian Naive Bayes classifiers  
-LinearSvm.pkl: Linear Support vector machine classifiers  
-Logic.pkl:Inductive logic programming classifiers  
-RadialSvm.pkl: Radial Support vector machine classifiers  
-classifier.pkl: Default classifier is linear SVM  
+  * Dockerfile: load docker image
+  * seccam.py: Takes in three arguments for caliberation, time and sensitivity. According to these parameter, the security camera takes pictures each time it detects motion and saves it on the router for future reference.  
+  * LedControl.py: control led bulb  
+  * smarthouse.py: main file, initialize default settings, get connection to speaker, led bulb and camera  
+  * socoControl.py: control SONOS speaker  
+  * run.sh  
+  * face_classifier.py: run face recognition alogrithm  
+  * Forest.pkl: Random forests ensemble learning method for classification, regression  
+  * GaussianNB.pkl: Gaussian Naive Bayes classifiers  
+  * LinearSvm.pkl: Linear Support vector machine classifiers  
+  * Logic.pkl:Inductive logic programming classifiers  
+  * RadialSvm.pkl: Radial Support vector machine classifiers  
+  * classifier.pkl: Default classifier is linear SVM  
 
 ## ports exposed:  
 
-80  
-81  
-8000  
-8010  
-8011: Camera  
-8012: Led bulb  
-8013  
-8014  
-8015: SONOS speaker  
-8500  
-9000  
+  * 80  
+  * 81  
+  * 8000  
+  * 8010  
+  * 8011: Camera  
+  * 8012: Led bulb  
+  * 8015: SONOS speaker  
+  * 8500  
+  * 9000  
+
 ## Getting started
 
+Fork this project to your own github account.  
+Change the run.sh for tweaking the parameters.  
+![alt text][logo]
+[logo]: https://github.com/m4a11205/Openface-on-Paradrop/blob/master/sample.png "instruction of setting"
 
 ## How to train face-recognition classifier
 0. Put the photos used as training instances to LocalPath/training-images, where LocalPath is an user-specified path in the user's machine/router. Note that under LocalPath/training-images, users must create a folder for each person, and group all the photos accordingly. For example, if there are two people, namely P1 and P2, then the structure should look like this:
@@ -95,4 +97,6 @@ cp -f ./generated-embeddings/*.pkl /link/LocalPath/Openface-on-Paradrop/chute/.
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Setting Flux Bulb and SONOS Speaker IP Address
-Currently we just use fixed IP address for bulb and speaker. We need to change the default setting if wireless network environment changes. 
+Currently we just use fixed IP address for bulb and speaker. We need to change the default setting if wireless network environment changes.  
+
+
