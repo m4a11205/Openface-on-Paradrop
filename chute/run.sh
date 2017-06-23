@@ -9,7 +9,8 @@ chmod a+rw /var/www/html/motionLog
 
 # Execute the file, one pic every 2 seconds
 # python /usr/local/bin/smarthouse.py -m_sec 5.0 infer /usr/local/bin test.jpg > smarthouse.log 2> smarthouse.err &
-
+# the version with only linearSVM classifier
+# python /usr/local/bin/smarthouse.py -m_sec 5.0 infer /usr/local/bin/classifier.pkl test.jpg
 # Add the symlink
 ln -s --relative /var/www/html/motionLog /var/www/html/app-dist/
 
