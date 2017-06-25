@@ -76,8 +76,10 @@ def create_app(ip, m_save, args, align, net, bulb, sonos):
         ## face recognition
         args.imgs = []
         args.imgs.append(fileName)
-        #scores, people = face_classifier.infer(args, align, net, args.multi)
-        scores, people = face_classifier.inferMulti(args, align, net)
+        # with only linearSVM classifier
+        scores, people = face_classifier.infer(args, align, net, args.multi)
+        # with multi-classifier
+        #scores, people = face_classifier.inferMulti(args, align, net)
         prediction = ""
 
         if( len(people) > 0):
