@@ -91,6 +91,7 @@ def create_app(ip, m_save, args, align, net, bulb, sonos):
                 thread.start_new_thread( sonos.alarm, () )
             else:
                 thread.start_new_thread( sonos.play_by_userName, (name,) )
+                thread.start_new_thread( bulb.flashGreen, () )
 
             prediction = 'Predict %s with confidence %.2f\n' % (name, score)
 
