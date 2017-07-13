@@ -15,8 +15,8 @@ URL_BASE = {'ted': 'http://ia801402.us.archive.org/20/items/TenD2005-07-16.flac1
 'Unknown': 'Unknown'
 }
 
-MUSIC_BASE = {'Wonderboy': 'http://ia801402.us.archive.org/20/items/TenD2005-07-16.flac16/TenD2005-07-16t10Wonderboy.mp3',
-'m_mTCE_490d00001683125d.mp3': 'http://fmn.rrimg.com/fmn059/audio/20140822/0210/m_mTCE_490d00001683125d.mp3'
+MUSIC_BASE = {'http://ia801402.us.archive.org/20/items/TenD2005-07-16.flac16/TenD2005-07-16t10Wonderboy.mp3':'Wonderboy',
+ 'http://fmn.rrimg.com/fmn059/audio/20140822/0210/m_mTCE_490d00001683125d.mp3': 'm_mTCE_490d00001683125d.mp3'
 }
 # Alarm sound #
 ALARM_URL = 'http://soundbible.com/mp3/School_Fire_Alarm-Cullen_Card-202875844.mp3'
