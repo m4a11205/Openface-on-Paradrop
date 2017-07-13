@@ -64,7 +64,7 @@ class SonoController():
         if (url == "Unknown"):
             self.core.play_uri(ALARM_URL)
         else:
-            track = sonos.get_current_track_info()
+            track = self.core.get_current_track_info()
             current_play = track['title']
             target_play = MUSIC_BASE.get(url, "Unknow")
             if (current_play == target_play):
