@@ -35,7 +35,6 @@ THRESH_0 = 20.0
 THRESH_1 = 40.0
 THRESH_2 = 60.0
 
-#'''
 
 def setupArgParse():
     parser = argparse.ArgumentParser(description='smarthouse security suite')
@@ -119,7 +118,8 @@ if(__name__ == "__main__"):
 
     ######################### LED ############################
     # Run LED Controller App
-    bulb = LedControl.connectBulb()
+    # test bulb
+    #bulb = LedControl.connectBulb()
 
     ######################### Speaker ############################
     # Run Speaker Controller App

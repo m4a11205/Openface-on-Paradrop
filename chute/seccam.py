@@ -99,12 +99,12 @@ def create_app(ip, m_save, args, align, net, bulb, sonos):
 
     return app
 
-#'''
+
 def run_app(ip, m_save, args, align, net, bulb, sonos):
     print("\n WebCam App is ready !!!\n")
     app = create_app(ip, m_save, args, align, net, bulb, sonos)
     app.run(host = '0.0.0.0', port = 8011)
-#'''
+
 
 
 def getImage(ip):

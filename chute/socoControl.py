@@ -15,14 +15,16 @@ URL_BASE = {'ted': 'http://ia801402.us.archive.org/20/items/TenD2005-07-16.flac1
 'Unknown': 'Unknown'
 }
 
-
-# https://docs.google.com/uc?export=open&id=0BwZNdRbemZmsSndXUWRmOVQxaXc
+MUSIC_BASE = {'Wonderboy': 'http://ia801402.us.archive.org/20/items/TenD2005-07-16.flac16/TenD2005-07-16t10Wonderboy.mp3',
+'m_mTCE_490d00001683125d.mp3': 'http://fmn.rrimg.com/fmn059/audio/20140822/0210/m_mTCE_490d00001683125d.mp3'
+}
+# Alarm sound #
 ALARM_URL = 'http://soundbible.com/mp3/School_Fire_Alarm-Cullen_Card-202875844.mp3'
+# Classic Music #
 U0 = 'http://fmn.rrimg.com/fmn059/audio/20140822/0210/m_mTCE_490d00001683125d.mp3'
+U1 = 'http://ia801402.us.archive.org/20/items/TenD2005-07-16.flac16/TenD2005-07-16t10Wonderboy.mp3'
 
-U1 = 'http://gdurl.com/5lI7'
 
-U2 = 'http://gdurl.com/5lI7.mp3'
 
 
 '''
@@ -62,7 +64,13 @@ class SonoController():
         if (url == "Unknown"):
             self.core.play_uri(ALARM_URL)
         else:
-            self.core.play_uri(url)
+            track = sonos.get_current_track_info()
+            current_play = track['title']
+            target_play = MUSIC_BASE.get(url, "Unknow")
+            if (current_play == target_play):
+                continue
+            else:
+                self.core.play_uri(url)
 
     def pause(self):
         self.core.pause()
@@ -96,23 +104,22 @@ def connectSpeaker():
 
 
 if __name__ == '__main__':
-    sono_ip = "192.168.128.181"
-    #sonos = SoCo(sono_ip) # Pass in the IP of your Sonos speaker
-    sonos = SonoController(sono_ip)
     # You could use the discover function instead, if you don't know the IP
+    sono_ip = "192.168.128.181"    
+    sonos = SonoController(sono_ip)
+    
+    sonos.play_uri(U1)
 
     # Pass in a URI to a media file to have it streamed through the Sonos
     # speaker
     #sonos.play_uri(ALARM_URL)
-    sonos.play_uri(U0)
-    #sonos.play_uri(U1)
-    #sonos.play_uri(U2)
 
+    #sonos = SoCo(sono_ip) # Pass in the IP of your Sonos speaker
 
-    #track = sonos.get_current_track_info()
+    track = sonos.get_current_track_info()
 
-    #print track['title']
-    #print sonos.player_name()
+    print track['title']
+    print sonos.player_name()
     #sonos.pause()
 
     # Play a stopped or paused track
