@@ -68,7 +68,7 @@ class SonoController():
             current_play = track['title']
             target_play = MUSIC_BASE.get(url, "Unknow")
             if (current_play == target_play):
-                continue
+                print "the same person"
             else:
                 self.core.play_uri(url)
 
