@@ -8,6 +8,7 @@ import thread
 from flask import Flask
 from flask import request
 import openface
+import requests
 
 try:
     import PIL
@@ -41,6 +42,7 @@ def create_app(ip, m_save, args, align, net, bulb, sonos):
     @app.route('/')
     def hello_world():
         return 'Hello, World!'
+
     @app.route('/send')
     def get_data():
         return requests.get('http://example.com').content
