@@ -47,7 +47,7 @@ def create_app(ip, m_save, args, align, net, bulb, sonos):
     def recognitionConst():
         #while(True):
         #    time.sleep(2)
-        return requests.get('192.168.1.1:8011/snap').content
+        return requests.get('127.0.0.1:8011/snap').content
 
     @app.route('/snap')
     def takeSnapShot():
