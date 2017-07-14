@@ -66,7 +66,9 @@ class SonoController():
         else:
             track = self.core.get_current_track_info()
             current_play = track['title']
+            print track['title']
             target_play = MUSIC_BASE.get(url, "Unknow")
+            print target_play
             if (current_play == target_play):
                 print "the same person"
             else:
