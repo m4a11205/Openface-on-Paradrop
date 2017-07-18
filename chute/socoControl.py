@@ -52,7 +52,7 @@ def run_SONO_App(sonos):
     print("\n SONO Speaker Controller App is ready !!!\n")
     app = create_SONO_App(sonos)
     app.run(host = '0.0.0.0', port = 8015)
-    
+
 
 
 class SonoController():
@@ -76,7 +76,7 @@ class SonoController():
                 self.core.clear_queue()
                 self.core.add_uri_to_queue(ALARM_URL)
                 self.core.add_uri_to_queue(END_URL)
-                self.cores.play_from_queue(0, True)
+                self.core.play_from_queue(0, True)
         else:
             track = self.core.get_current_track_info()
             current_play = track['title']
@@ -89,7 +89,7 @@ class SonoController():
                 self.core.clear_queue()
                 self.core.add_uri_to_queue(url)
                 self.core.add_uri_to_queue(END_URL)
-                self.cores.play_from_queue(0, True)
+                self.core.play_from_queue(0, True)
 
     def pause(self):
         self.core.pause()
