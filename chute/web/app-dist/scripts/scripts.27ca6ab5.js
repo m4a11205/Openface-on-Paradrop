@@ -65,7 +65,7 @@ angular.module("smarthouseApp")
       }, function(response) {
         $scope.faceRecognitionOutput = response.data || 'Request failed';
       });
-  }, 2000);
+  }, 10000);
 
   $scope.$on('$destroy', function() {
     $interval.cancel(ticker);
